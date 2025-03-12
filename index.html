@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Catálogo de Impressão 3D</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f2f2f2; }
+    header { background: #333; color: white; padding: 20px; text-align: center; }
+    h1 { margin: 0; }
+    .catalog { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 20px; }
+    .product { background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .product img { width: 100%; border-radius: 10px; }
+    .product h3 { margin: 10px 0 5px; }
+    .product p { margin: 0 0 10px; }
+    .price { font-weight: bold; color: green; }
+    .button { display: inline-block; padding: 10px 15px; background: green; color: white; border-radius: 5px; text-decoration: none; }
+    footer { text-align: center; padding: 10px; background: #333; color: white; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Loja 3D - Catálogo de Impressão 3D</h1>
+  <p>Produtos exclusivos e personalizados em impressão 3D!</p>
+</header>
+
+<section class="catalog">
+  <!-- Produto 1 -->
+  <div class="product">
+    <img src="C:\Users\luis.trigo\Downloads\Photos-001 - 2025-03-04T201331.659\IMG_20250304_122348.jpg" alt="Suporte">
+    <h3>Suporte de Telemóvel</h3>
+    <p>Feito em PLA, disponível em várias cores.</p>
+    <p class="price">€12,00</p>
+    <a href="https://wa.me/351934667623?text=Olá, quero encomendar o Suporte de Telemóvel" class="button">Encomendar</a>
+  </div>
+
+  <!-- Produto 2 -->
+  <div class="product">
+    <img src="produto2.jpg" alt="Produto 2">
+    <h3>Figura Personalizada</h3>
+    <p>Modelo único, ideal para decoração.</p>
+    <p class="price">€25,00</p>
+    <a href="https://wa.me/351934667623?text=Olá, quero encomendar a Figura Personalizada" class="button">Encomendar</a>
+  </div>
+
+  <!-- Produto 3 -->
+  <div class="product">
+    <img src="produto3.jpg" alt="Produto 3">
+    <h3>Peça Técnica Sob Medida</h3>
+    <p>Criação de peças específicas para o seu projeto.</p>
+    <p class="price">Sob orçamento</p>
+    <a href="https://wa.me/351934667623?text=Olá, gostaria de informações sobre a Peça Técnica Sob Medida" class="button">Pedir Orçamento</a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2005 ltrigo3D - Impressão 3D Personalizada | Contacto: <a href="mailto:ltrigo3d@gmail.com" style="color: #fff;">ltrigo3d@gmail.com</a></p>
+</footer>
+
+</body>
+</html>
