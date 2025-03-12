@@ -51,7 +51,7 @@
       <img src="IMG_20250304_122348.jpg" alt="Suporte Telemóvel" class="rounded-lg w-full h-60 object-cover">
       <h3 class="text-xl font-semibold mt-4">Suporte de Telemóvel</h3>
       <p class="text-green-600 font-bold text-lg mt-2">€12,00</p>
-      <button onclick="addToCart('Suporte de Telemóvel', 12)" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+      <button onclick="addToCart('Suporte de Telemóvel', 12, 'IMG_20250304_122348.jpg')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
     </div>
 
     <!-- Produto 2 -->
@@ -59,7 +59,7 @@
       <img src="IMG_20250302_204523.jpg" alt="Figura Personalizada" class="rounded-lg w-full h-60 object-cover">
       <h3 class="text-xl font-semibold mt-4">Figura Personalizada</h3>
       <p class="text-green-600 font-bold text-lg mt-2">€25,00</p>
-      <button onclick="addToCart('Figura Personalizada', 25)" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+      <button onclick="addToCart('Figura Personalizada', 25, 'IMG_20250302_204523.jpg')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
     </div>
 
     <!-- Produto 3 -->
@@ -67,7 +67,7 @@
       <img src="IMG_20250213_204047.jpg" alt="Peça Técnica Sob Medida" class="rounded-lg w-full h-60 object-cover">
       <h3 class="text-xl font-semibold mt-4">Peça Técnica Sob Medida</h3>
       <p class="text-orange-600 font-bold text-lg mt-2">Sob Orçamento</p>
-      <button onclick="addToCart('Peça Técnica Sob Medida', 0)" class="cart-btn mt-4 bg-orange-600 hover:bg-orange-700 text-white py-2 px-4 rounded-lg">Solicitar Orçamento</button>
+      <button onclick="addToCart('Peça Técnica Sob Medida', 0, 'IMG_20250213_204047.jpg')" class="cart-btn mt-4 bg-orange-600 hover:bg-orange-700 text-white py-2 px-4 rounded-lg">Solicitar Orçamento</button>
     </div>
 
   </section>
@@ -91,7 +91,7 @@
     let cart = [];
     let total = 0;
 
-    function addToCart(product, price) {
+    function addToCart(product, price, imgSrc) {
       // Verifica se o produto já existe no carrinho
       const itemIndex = cart.findIndex(item => item.product === product);
       if (itemIndex > -1) {
@@ -100,7 +100,7 @@
         total += price;
       } else {
         // Caso contrário, adiciona o produto com quantidade 1
-        const item = { id: Date.now(), product, price, quantity: 1 };
+        const item = { id: Date.now(), product, price, quantity: 1, imgSrc };
         cart.push(item);
         total += price;
       }
@@ -139,7 +139,7 @@
         li.className = "flex justify-between items-center border-b pb-1";
         li.innerHTML = `
           <div class="flex items-center gap-2">
-            <img src="IMG_20250304_122348.jpg" alt="${item.product}" class="w-12 h-12 rounded-lg object-cover">
+            <img src="${item.imgSrc}" alt="${item.product}" class="w-12 h-12 rounded-lg object-cover">
             <div>
               <span class="font-semibold">${item.product}</span><br>
               <span class="text-gray-600 text-sm">€${item.price} x ${item.quantity}</span>
@@ -174,8 +174,9 @@
       let message = 'Olá, gostaria de encomendar:\n';
       cart.forEach(item => {
         let priceText = item.price > 0 ? '€' + item.price.toFixed(2) : 'Sob Orçamento';
-        message += `- ${item.product} (x${item.quantity}) (${priceText})\n`;
+        message += `- ${item.product} (${priceText}) x ${item.quantity}\n`;
       });
+
       message += `Total: €${total.toFixed(2)}\n`;
       const whatsapp = '351912345678'; // Altere para o seu número real
       window.open(`https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
