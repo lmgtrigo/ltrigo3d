@@ -5,44 +5,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Loja 3D - Catálogo</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Custom styles */
+    .product-card {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .cart-btn {
+      transition: background-color 0.3s ease;
+    }
+
+    .cart-btn:hover {
+      background-color: #f97316;
+    }
+
+    .input-coupon:focus {
+      outline: none;
+      border-color: #34d399;
+    }
+  </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-50 font-poppins">
 
   <!-- Header -->
-  <header class="bg-gray-800 text-white py-6 text-center">
-    <h1 class="text-3xl font-bold">Loja 3D - Catálogo de Impressão 3D</h1>
+  <header class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-6 text-center">
+    <h1 class="text-4xl font-bold">Loja 3D - Catálogo de Impressão 3D</h1>
+    <p class="mt-2 text-lg">Produtos exclusivos criados com impressão 3D de alta qualidade</p>
   </header>
 
   <!-- Banner -->
   <div class="bg-yellow-500 text-white text-center py-3 font-semibold">
-    <p>Promoção Especial! Use o código <strong>10OFF</strong> para 10% de desconto em sua compra.</p>
+    <p>Use o código <strong>10OFF</strong> para 10% de desconto na sua compra!</p>
   </div>
 
   <!-- Catálogo -->
   <section class="p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
+    
     <!-- Produto 1 -->
-    <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center">
-      <img src="IMG_20250304_122348.jpg" alt="Suporte Telemóvel" class="rounded-lg w-full h-72 object-cover">
+    <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+      <img src="IMG_20250304_122348.jpg" alt="Suporte Telemóvel" class="rounded-lg w-full h-60 object-cover">
       <h3 class="text-xl font-semibold mt-4">Suporte de Telemóvel</h3>
       <p class="text-green-600 font-bold text-lg mt-2">€12,00</p>
-      <button onclick="addToCart('Suporte de Telemóvel', 12)" class="mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transform transition duration-300 hover:scale-105">Adicionar ao Carrinho</button>
+      <button onclick="addToCart('Suporte de Telemóvel', 12)" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
     </div>
 
     <!-- Produto 2 -->
-    <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center">
-      <img src="IMG_20250302_204523.jpg" alt="Figura Personalizada" class="rounded-lg w-full h-72 object-cover">
+    <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+      <img src="IMG_20250302_204523.jpg" alt="Figura Personalizada" class="rounded-lg w-full h-60 object-cover">
       <h3 class="text-xl font-semibold mt-4">Figura Personalizada</h3>
       <p class="text-green-600 font-bold text-lg mt-2">€25,00</p>
-      <button onclick="addToCart('Figura Personalizada', 25)" class="mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transform transition duration-300 hover:scale-105">Adicionar ao Carrinho</button>
+      <button onclick="addToCart('Figura Personalizada', 25)" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
     </div>
 
     <!-- Produto 3 -->
-    <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center">
-      <img src="IMG_20250213_204047.jpg" alt="Peça Técnica" class="rounded-lg w-full h-72 object-cover">
+    <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+      <img src="IMG_20250213_204047.jpg" alt="Peça Técnica Sob Medida" class="rounded-lg w-full h-60 object-cover">
       <h3 class="text-xl font-semibold mt-4">Peça Técnica Sob Medida</h3>
       <p class="text-orange-600 font-bold text-lg mt-2">Sob Orçamento</p>
-      <button onclick="addToCart('Peça Técnica Sob Medida', 0)" class="mt-4 bg-orange-600 hover:bg-orange-700 text-white py-2 px-4 rounded-lg transform transition duration-300 hover:scale-105">Solicitar Orçamento</button>
+      <button onclick="addToCart('Peça Técnica Sob Medida', 0)" class="cart-btn mt-4 bg-orange-600 hover:bg-orange-700 text-white py-2 px-4 rounded-lg">Solicitar Orçamento</button>
     </div>
 
   </section>
@@ -51,34 +76,15 @@
   <div id="cart" class="fixed top-4 right-4 bg-white shadow-xl rounded-xl p-6 w-80 max-h-[400px] overflow-y-auto scale-0 transition-transform transform origin-top-right">
     <h2 class="text-xl font-bold mb-4">Carrinho</h2>
     <ul id="cart-items" class="space-y-2"></ul>
-    
+
     <!-- Cupom de Desconto -->
     <div class="mt-4 flex items-center justify-between">
-      <input type="text" id="coupon-code" placeholder="Código do cupom" class="p-2 border rounded-md w-48">
+      <input type="text" id="coupon-code" placeholder="Código do cupom" class="input-coupon p-2 border rounded-md w-48">
       <button onclick="applyCoupon()" class="bg-blue-600 text-white py-2 px-4 rounded-lg">Aplicar Cupom</button>
     </div>
 
     <p class="mt-4 font-semibold">Total: €<span id="cart-total">0</span></p>
     <button onclick="checkout()" class="mt-4 bg-orange-600 text-white w-full py-2 rounded-lg">Finalizar Pedido</button>
-  </div>
-
-  <!-- Produtos Relacionados -->
-  <div class="mt-8">
-    <h3 class="text-lg font-semibold">Produtos Relacionados</h3>
-    <div class="flex gap-4 mt-4">
-      <div class="w-1/3 bg-white rounded-lg shadow-lg p-4">
-        <img src="IMG_20250304_122348.jpg" alt="Suporte Telemóvel" class="rounded-lg w-full h-40 object-cover">
-        <p class="font-semibold mt-2">Suporte Telemóvel</p>
-        <p class="text-green-600 font-bold">€12,00</p>
-        <button class="bg-green-600 text-white py-2 px-4 rounded-lg mt-2">Adicionar ao Carrinho</button>
-      </div>
-      <div class="w-1/3 bg-white rounded-lg shadow-lg p-4">
-        <img src="IMG_20250302_204523.jpg" alt="Figura Personalizada" class="rounded-lg w-full h-40 object-cover">
-        <p class="font-semibold mt-2">Figura Personalizada</p>
-        <p class="text-green-600 font-bold">€25,00</p>
-        <button class="bg-green-600 text-white py-2 px-4 rounded-lg mt-2">Adicionar ao Carrinho</button>
-      </div>
-    </div>
   </div>
 
   <script>
