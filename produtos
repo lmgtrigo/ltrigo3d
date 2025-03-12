@@ -1,0 +1,446 @@
+  <!-- Produtos -->
+    <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+      <img src="1000.png" alt="Produto 1" class="product-img rounded-lg">
+      <h3 class="text-xl font-semibold mt-4">Produto 1</h3>
+      <p class="text-green-600 font-bold text-lg mt-2">€50,00</p>
+      <button onclick="addToCart('Produto 1', 50, '1000.png')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+    </div>
+
+    <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+      <img src="11.PNG" alt="Produto 2" class="product-img rounded-lg">
+      <h3 class="text-xl font-semibold mt-4">Produto 2</h3>
+      <p class="text-green-600 font-bold text-lg mt-2">€55,00</p>
+      <button onclick="addToCart('Produto 2', 55, '11.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+    </div>
+
+    <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+      <img src="111.PNG" alt="Produto 3" class="product-img rounded-lg">
+      <h3 class="text-xl font-semibold mt-4">Produto 3</h3>
+      <p class="text-green-600 font-bold text-lg mt-2">€60,00</p>
+      <button onclick="addToCart('Produto 3', 60, '111.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+    </div>
+
+    <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+      <img src="1111.PNG" alt="Produto 4" class="product-img rounded-lg">
+      <h3 class="text-xl font-semibold mt-4">Produto 4</h3>
+      <p class="text-green-600 font-bold text-lg mt-2">€65,00</p>
+      <button onclick="addToCart('Produto 4', 65, '1111.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+    </div>
+
+    <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+      <img src="11111.PNG" alt="Produto 5" class="product-img rounded-lg">
+      <h3 class="text-xl font-semibold mt-4">Produto 5</h3>
+      <p class="text-green-600 font-bold text-lg mt-2">€70,00</p>
+      <button onclick="addToCart('Produto 5', 70, '11111.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+    </div>
+
+    <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+      <img src="1115.PNG" alt="Produto 6" class="product-img rounded-lg">
+      <h3 class="text-xl font-semibold mt-4">Produto 6</h3>
+      <p class="text-green-600 font-bold text-lg mt-2">€75,00</p>
+      <button onclick="addToCart('Produto 6', 75, '1115.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+    </div>
+
+    <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+      <img src="112.PNG" alt="Produto 7" class="product-img rounded-lg">
+      <h3 class="text-xl font-semibold mt-4">Produto 7</h3>
+      <p class="text-green-600 font-bold text-lg mt-2">€80,00</p>
+      <button onclick="addToCart('Produto 7', 80, '112.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+    </div>
+
+    <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+      <img src="12.PNG" alt="Produto 8" class="product-img rounded-lg">
+      <h3 class="text-xl font-semibold mt-4">Produto 8</h3>
+      <p class="text-green-600 font-bold text-lg mt-2">€85,00</p>
+      <button onclick="addToCart('Produto 8', 85, '12.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+    </div>
+
+    <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+      <img src="1212123.PNG" alt="Produto 9" class="product-img rounded-lg">
+      <h3 class="text-xl font-semibold mt-4">Produto 9</h3>
+      <p class="text-green-600 font-bold text-lg mt-2">€90,00</p>
+      <button onclick="addToCart('Produto 9', 90, '1212123.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+    </div>
+
+    <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+      <img src="13.PNG" alt="Produto 10" class="product-img rounded-lg">
+      <h3 class="text-xl font-semibold mt-4">Produto 10</h3>
+      <p class="text-green-600 font-bold text-lg mt-2">€95,00</p>
+      <button onclick="addToCart('Produto 10', 95, '13.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+    </div>
+
+    <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+      <img src="14.PNG" alt="Produto 11" class="product-img rounded-lg">
+      <h3 class="text-xl font-semibold mt-4">Produto 11</h3>
+      <p class="text-green-600 font-bold text-lg mt-2">€100,00</p>
+      <button onclick="addToCart('Produto 11', 100, '14.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+    </div>
+
+    <!-- Produtos continuados -->
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="21111.PNG" alt="Produto 12" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 12</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€105,00</p>
+  <button onclick="addToCart('Produto 12', 105, '21111.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="212111.PNG" alt="Produto 13" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 13</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€110,00</p>
+  <button onclick="addToCart('Produto 13', 110, '212111.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="2122.PNG" alt="Produto 14" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 14</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€115,00</p>
+  <button onclick="addToCart('Produto 14', 115, '2122.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="21231.PNG" alt="Produto 15" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 15</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€120,00</p>
+  <button onclick="addToCart('Produto 15', 120, '21231.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="2222.PNG" alt="Produto 16" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 16</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€125,00</p>
+  <button onclick="addToCart('Produto 16', 125, '2222.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="22222.PNG" alt="Produto 17" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 17</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€130,00</p>
+  <button onclick="addToCart('Produto 17', 130, '22222.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="2323.PNG" alt="Produto 18" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 18</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€135,00</p>
+  <button onclick="addToCart('Produto 18', 135, '2323.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="2323232.PNG" alt="Produto 19" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 19</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€140,00</p>
+  <button onclick="addToCart('Produto 19', 140, '2323232.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="3131111.PNG" alt="Produto 20" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 20</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€145,00</p>
+  <button onclick="addToCart('Produto 20', 145, '3131111.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="31312.PNG" alt="Produto 21" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 21</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€150,00</p>
+  <button onclick="addToCart('Produto 21', 150, '31312.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="4211.PNG" alt="Produto 22" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 22</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€155,00</p>
+  <button onclick="addToCart('Produto 22', 155, '4211.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<!-- Produtos continuados -->
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="42134234.PNG" alt="Produto 23" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 23</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€160,00</p>
+  <button onclick="addToCart('Produto 23', 160, '42134234.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="42333.PNG" alt="Produto 24" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 24</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€165,00</p>
+  <button onclick="addToCart('Produto 24', 165, '42333.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="4322111.PNG" alt="Produto 25" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 25</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€170,00</p>
+  <button onclick="addToCart('Produto 25', 170, '4322111.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="43222.PNG" alt="Produto 26" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 26</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€175,00</p>
+  <button onclick="addToCart('Produto 26', 175, '43222.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="44.PNG" alt="Produto 27" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 27</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€180,00</p>
+  <button onclick="addToCart('Produto 27', 180, '44.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="45.PNG" alt="Produto 28" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 28</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€185,00</p>
+  <button onclick="addToCart('Produto 28', 185, '45.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="453645.PNG" alt="Produto 29" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 29</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€190,00</p>
+  <button onclick="addToCart('Produto 29', 190, '453645.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="46.PNG" alt="Produto 30" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 30</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€195,00</p>
+  <button onclick="addToCart('Produto 30', 195, '46.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="47.PNG" alt="Produto 31" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 31</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€200,00</p>
+  <button onclick="addToCart('Produto 31', 200, '47.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="48.PNG" alt="Produto 32" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 32</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€205,00</p>
+  <button onclick="addToCart('Produto 32', 205, '48.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="49.PNG" alt="Produto 33" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 33</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€210,00</p>
+  <button onclick="addToCart('Produto 33', 210, '49.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="50.PNG" alt="Produto 34" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 34</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€215,00</p>
+  <button onclick="addToCart('Produto 34', 215, '50.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="51.PNG" alt="Produto 35" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 35</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€220,00</p>
+  <button onclick="addToCart('Produto 35', 220, '51.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<!-- Produtos continuados -->
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="52.PNG" alt="Produto 36" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 36</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€225,00</p>
+  <button onclick="addToCart('Produto 36', 225, '52.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="53.PNG" alt="Produto 37" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 37</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€230,00</p>
+  <button onclick="addToCart('Produto 37', 230, '53.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="54.PNG" alt="Produto 38" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 38</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€235,00</p>
+  <button onclick="addToCart('Produto 38', 235, '54.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="54222.PNG" alt="Produto 39" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 39</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€240,00</p>
+  <button onclick="addToCart('Produto 39', 240, '54222.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="55.PNG" alt="Produto 40" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 40</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€245,00</p>
+  <button onclick="addToCart('Produto 40', 245, '55.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="56.PNG" alt="Produto 41" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 41</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€250,00</p>
+  <button onclick="addToCart('Produto 41', 250, '56.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="57.PNG" alt="Produto 42" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 42</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€255,00</p>
+  <button onclick="addToCart('Produto 42', 255, '57.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="58.PNG" alt="Produto 43" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 43</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€260,00</p>
+  <button onclick="addToCart('Produto 43', 260, '58.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="59.PNG" alt="Produto 44" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 44</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€265,00</p>
+  <button onclick="addToCart('Produto 44', 265, '59.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="61.PNG" alt="Produto 45" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 45</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€270,00</p>
+  <button onclick="addToCart('Produto 45', 270, '61.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="62.PNG" alt="Produto 46" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 46</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€275,00</p>
+  <button onclick="addToCart('Produto 46', 275, '62.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="63.PNG" alt="Produto 47" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 47</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€280,00</p>
+  <button onclick="addToCart('Produto 47', 280, '63.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="64.PNG" alt="Produto 48" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 48</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€285,00</p>
+  <button onclick="addToCart('Produto 48', 285, '64.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="65.PNG" alt="Produto 49" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 49</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€290,00</p>
+  <button onclick="addToCart('Produto 49', 290, '65.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="65234223.PNG" alt="Produto 50" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 50</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€295,00</p>
+  <button onclick="addToCart('Produto 50', 295, '65234223.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<!-- Produtos continuados -->
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="656554.PNG" alt="Produto 51" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 51</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€300,00</p>
+  <button onclick="addToCart('Produto 51', 300, '656554.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="66.PNG" alt="Produto 52" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 52</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€305,00</p>
+  <button onclick="addToCart('Produto 52', 305, '66.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="67.PNG" alt="Produto 53" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 53</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€310,00</p>
+  <button onclick="addToCart('Produto 53', 310, '67.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="86856.PNG" alt="Produto 54" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 54</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€315,00</p>
+  <button onclick="addToCart('Produto 54', 315, '86856.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="87878.PNG" alt="Produto 55" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 55</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€320,00</p>
+  <button onclick="addToCart('Produto 55', 320, '87878.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="87878787.PNG" alt="Produto 56" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 56</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€325,00</p>
+  <button onclick="addToCart('Produto 56', 325, '87878787.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="8977.PNG" alt="Produto 57" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 57</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€330,00</p>
+  <button onclick="addToCart('Produto 57', 330, '8977.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="987987.PNG" alt="Produto 58" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 58</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€335,00</p>
+  <button onclick="addToCart('Produto 58', 335, '987987.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="Captu1re.PNG" alt="Produto 59" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 59</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€340,00</p>
+  <button onclick="addToCart('Produto 59', 340, 'Captu1re.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="IMG_20250213_204047.jpg" alt="Produto 60" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 60</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€345,00</p>
+  <button onclick="addToCart('Produto 60', 345, 'IMG_20250213_204047.jpg')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="IMG_20250302_204523.jpg" alt="Produto 61" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 61</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€350,00</p>
+  <button onclick="addToCart('Produto 61', 350, 'IMG_20250302_204523.jpg')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="IMG_20250304_122348.jpg" alt="Produto 62" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 62</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€355,00</p>
+  <button onclick="addToCart('Produto 62', 355, 'IMG_20250304_122348.jpg')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
+<div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+  <img src="apple.PNG" alt="Produto 63" class="product-img rounded-lg">
+  <h3 class="text-xl font-semibold mt-4">Produto 63</h3>
+  <p class="text-green-600 font-bold text-lg mt-2">€360,00</p>
+  <button onclick="addToCart('Produto 63', 360, 'apple.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+</div>
+
