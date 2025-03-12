@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Loja 3D - Impressão 3D</title>
+  <title>Loja 3D - Luminárias e Decoração</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Custom styles */
     .product-card {
       transition: transform 0.3s ease-in-out;
     }
@@ -23,20 +22,15 @@
       background-color: #f97316;
     }
 
-    .input-coupon:focus {
-      outline: none;
-      border-color: #34d399;
-    }
-
     .banner-image {
       width: 100%;
-      height: 350px;
+      height: 450px;
       object-fit: cover;
     }
 
     .product-img {
       width: 100%;
-      height: 200px;
+      height: 250px;
       object-fit: cover;
     }
 
@@ -58,12 +52,12 @@
     }
   </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-100">
 
   <!-- Header -->
   <header class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-6">
     <div class="max-w-screen-xl mx-auto px-6 flex justify-between items-center">
-      <h1 class="text-4xl font-bold">Loja 3D</h1>
+      <h1 class="text-4xl font-bold">Loja 3D - Luminárias e Decoração</h1>
       <nav>
         <ul class="flex space-x-6 text-lg">
           <li><a href="#home">Início</a></li>
@@ -75,39 +69,39 @@
     </div>
   </header>
 
-  <!-- Banner -->
+  <!-- Banner Principal -->
   <div class="relative">
-    <img src="https://via.placeholder.com/1500x500.png" alt="Banner Principal" class="banner-image">
+    <img src="https://via.placeholder.com/1500x500.png" alt="Banner Luminárias 3D" class="banner-image">
     <div class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
-      <h2 class="text-3xl text-white font-bold">Impressões 3D de Alta Qualidade</h2>
+      <h2 class="text-3xl text-white font-bold">Luminárias e Decoração 3D Exclusivas</h2>
     </div>
   </div>
 
-  <!-- Catálogo de Produtos -->
+  <!-- Seção de Produtos -->
   <section id="catalog" class="p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    
+
     <!-- Produto 1 -->
     <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
-      <img src="IMG_20250304_122348.jpg" alt="Suporte Telemóvel" class="product-img rounded-lg">
-      <h3 class="text-xl font-semibold mt-4">Suporte de Telemóvel</h3>
-      <p class="text-green-600 font-bold text-lg mt-2">€12,00</p>
-      <button onclick="addToCart('Suporte de Telemóvel', 12, 'IMG_20250304_122348.jpg')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+      <img src="IMG_20250304_122348.jpg" alt="Luminária de Mesa" class="product-img rounded-lg">
+      <h3 class="text-xl font-semibold mt-4">Luminária de Mesa</h3>
+      <p class="text-green-600 font-bold text-lg mt-2">€35,00</p>
+      <button onclick="addToCart('Luminária de Mesa', 35, 'IMG_20250304_122348.jpg')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
     </div>
 
     <!-- Produto 2 -->
     <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
-      <img src="IMG_20250302_204523.jpg" alt="Figura Personalizada" class="product-img rounded-lg">
-      <h3 class="text-xl font-semibold mt-4">Figura Personalizada</h3>
-      <p class="text-green-600 font-bold text-lg mt-2">€25,00</p>
-      <button onclick="addToCart('Figura Personalizada', 25, 'IMG_20250302_204523.jpg')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+      <img src="IMG_20250302_204523.jpg" alt="Luminária de Parede" class="product-img rounded-lg">
+      <h3 class="text-xl font-semibold mt-4">Luminária de Parede</h3>
+      <p class="text-green-600 font-bold text-lg mt-2">€50,00</p>
+      <button onclick="addToCart('Luminária de Parede', 50, 'IMG_20250302_204523.jpg')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
     </div>
 
     <!-- Produto 3 -->
     <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
-      <img src="IMG_20250213_204047.jpg" alt="Peça Técnica Sob Medida" class="product-img rounded-lg">
-      <h3 class="text-xl font-semibold mt-4">Peça Técnica Sob Medida</h3>
+      <img src="IMG_20250213_204047.jpg" alt="Luminária de Chão" class="product-img rounded-lg">
+      <h3 class="text-xl font-semibold mt-4">Luminária de Chão</h3>
       <p class="text-orange-600 font-bold text-lg mt-2">Sob Orçamento</p>
-      <button onclick="addToCart('Peça Técnica Sob Medida', 0, 'IMG_20250213_204047.jpg')" class="cart-btn mt-4 bg-orange-600 hover:bg-orange-700 text-white py-2 px-4 rounded-lg">Solicitar Orçamento</button>
+      <button onclick="addToCart('Luminária de Chão', 0, 'IMG_20250213_204047.jpg')" class="cart-btn mt-4 bg-orange-600 hover:bg-orange-700 text-white py-2 px-4 rounded-lg">Solicitar Orçamento</button>
     </div>
 
   </section>
@@ -179,14 +173,7 @@
       });
 
       cartTotal.textContent = total.toFixed(2);
-
-      if (cart.length > 0) {
-        cartElement.classList.remove('scale-0');
-        cartElement.classList.add('scale-100');
-      } else {
-        cartElement.classList.remove('scale-100');
-        cartElement.classList.add('scale-0');
-      }
+      cartElement.classList.add('scale-100');
     }
 
     function checkout() {
@@ -203,6 +190,5 @@
       window.open(`https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
     }
   </script>
-
 </body>
 </html>
