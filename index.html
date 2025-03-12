@@ -75,6 +75,21 @@
     <div class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center"></div>
   </div>
 
+   <!-- Carrinho de Compras (começa escondido) -->
+  <div id="cart" class="fixed top-0 right-0 p-6 bg-white shadow-xl rounded-l-xl w-80 h-full hidden z-50">
+    <h2 class="text-2xl font-semibold mb-4">Carrinho de Compras</h2>
+    <ul id="cart-items" class="list-none space-y-4 overflow-auto h-[70%]">
+      <!-- Itens do Carrinho -->
+    </ul>
+    <hr class="my-4">
+    <div class="flex justify-between items-center">
+      <span class="font-bold">Total:</span>
+      <span id="total-price" class="text-xl font-semibold">€0,00</span>
+    </div>
+    <button id="checkout-btn" class="mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg w-full">Finalizar Compra</button>
+  </div>
+  
+
   <!-- Seção de Produtos -->
   <section id="catalog" class="p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
   <!-- Carrinho de Compras -->
@@ -554,35 +569,58 @@
     </div>
   </footer>
 
- <!-- Script para adicionar ao carrinho -->
-  <script>
+<script>
     let cart = [];
 
     function addToCart(name, price, image) {
-      const product = { name, price, image };
-      cart.push(product);
+      const existingProduct = cart.find(item => item.name === name);
+      
+      if (existingProduct) {
+        existingProduct.quantity += 1;
+      } else {
+        cart.push({ name, price, image, quantity: 1 });
+      }
+
       updateCart();
     }
 
     function updateCart() {
       const cartItemsContainer = document.getElementById('cart-items');
-      const totalPrice = document.getElementById('total-price');
+      const totalPriceElement = document.getElementById('total-price');
+      const cartElement = document.getElementById('cart');
+
       cartItemsContainer.innerHTML = ''; // Limpa o carrinho
 
       let total = 0;
+
+      if (cart.length > 0) {
+        cartElement.classList.remove('hidden'); // Mostra o carrinho
+      } else {
+        cartElement.classList.add('hidden'); // Esconde o carrinho
+      }
+
       cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+
         const cartItem = document.createElement('li');
-        cartItem.classList.add('flex', 'items-center', 'space-x-4');
+        cartItem.classList.add('flex', 'items-center', 'space-x-4', 'justify-between');
+
         cartItem.innerHTML = `
-          <img src="${item.image}" alt="${item.name}" class="w-12 h-12 rounded-lg">
-          <span>${item.name}</span>
-          <span class="text-green-600">€${item.price.toFixed(2)}</span>
+          <div class="flex items-center space-x-4">
+            <img src="${item.image}" alt="${item.name}" class="w-12 h-12 rounded-lg">
+            <div>
+              <span>${item.name}</span>
+              <div class="text-sm text-gray-500">Qtd: ${item.quantity}</div>
+            </div>
+          </div>
+          <span class="text-green-600 font-semibold">€${itemTotal.toFixed(2)}</span>
         `;
+
         cartItemsContainer.appendChild(cartItem);
-        total += item.price;
       });
 
-      totalPrice.textContent = `€${total.toFixed(2)}`;
+      totalPriceElement.textContent = `€${total.toFixed(2)}`;
     }
   </script>
 
