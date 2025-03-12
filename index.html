@@ -14,7 +14,7 @@
 
 <!-- Catálogo -->
 <section class="p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-  
+
   <!-- Produto 1 -->
   <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center">
     <img src="IMG_20250304_122348.jpg" alt="Suporte Telemóvel" class="rounded-lg w-full h-72 object-cover">
@@ -42,7 +42,7 @@
 </section>
 
 <!-- Carrinho -->
-<div class="fixed top-4 right-4 bg-white shadow-xl rounded-xl p-6 w-80 max-h-96 overflow-y-auto">
+<div class="fixed top-4 right-4 bg-white shadow-xl rounded-xl p-6 w-80 max-h-[400px] overflow-y-auto">
   <h2 class="text-xl font-bold mb-4">Carrinho</h2>
   <ul id="cart-items" class="space-y-2"></ul>
   <p class="mt-4 font-semibold">Total: €<span id="cart-total">0</span></p>
@@ -54,22 +54,40 @@
   let total = 0;
 
   function addToCart(product, price) {
-    cart.push({ product, price });
+    const item = { id: Date.now(), product, price };
+    cart.push(item);
     if (price > 0) total += price;
     updateCart();
+  }
+
+  function removeFromCart(itemId) {
+    const itemIndex = cart.findIndex(item => item.id === itemId);
+    if (itemIndex > -1) {
+      if (cart[itemIndex].price > 0) total -= cart[itemIndex].price;
+      cart.splice(itemIndex, 1);
+      updateCart();
+    }
   }
 
   function updateCart() {
     const cartItems = document.getElementById('cart-items');
     const cartTotal = document.getElementById('cart-total');
     cartItems.innerHTML = '';
+
     cart.forEach(item => {
       let priceText = item.price > 0 ? '€' + item.price.toFixed(2) : 'Sob Orçamento';
       const li = document.createElement('li');
-      li.className = "flex justify-between border-b pb-1";
-      li.innerHTML = `<span>${item.product}</span><span>${priceText}</span>`;
+      li.className = "flex justify-between items-center border-b pb-1";
+      li.innerHTML = `
+        <div>
+          <span class="font-semibold">${item.product}</span> <br>
+          <span class="text-gray-600 text-sm">${priceText}</span>
+        </div>
+        <button onclick="removeFromCart(${item.id})" class="text-red-500 hover:text-red-700">X</button>
+      `;
       cartItems.appendChild(li);
     });
+
     cartTotal.textContent = total.toFixed(2);
   }
 
