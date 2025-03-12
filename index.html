@@ -103,91 +103,86 @@
       <button onclick="addToCart('Luminária de Chão', 0, 'IMG_20250213_204047.jpg')" class="cart-btn mt-4 bg-orange-600 hover:bg-orange-700 text-white py-2 px-4 rounded-lg">Solicitar Orçamento</button>
     </div>
 
+    <!-- Produto 4 -->
+    <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+      <img src="1000.png" alt="Produto 4" class="product-img rounded-lg">
+      <h3 class="text-xl font-semibold mt-4">Produto 4</h3>
+      <p class="text-green-600 font-bold text-lg mt-2">€40,00</p>
+      <button onclick="addToCart('Produto 4', 40, '1000.png')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+    </div>
+
+    <!-- Produto 5 -->
+    <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+      <img src="11.PNG" alt="Produto 5" class="product-img rounded-lg">
+      <h3 class="text-xl font-semibold mt-4">Produto 5</h3>
+      <p class="text-green-600 font-bold text-lg mt-2">€45,00</p>
+      <button onclick="addToCart('Produto 5', 45, '11.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+    </div>
+
+    <!-- Produto 6 -->
+    <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+      <img src="111.PNG" alt="Produto 6" class="product-img rounded-lg">
+      <h3 class="text-xl font-semibold mt-4">Produto 6</h3>
+      <p class="text-green-600 font-bold text-lg mt-2">€50,00</p>
+      <button onclick="addToCart('Produto 6', 50, '111.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+    </div>
+
+    <!-- Produto 7 -->
+    <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+      <img src="1111.PNG" alt="Produto 7" class="product-img rounded-lg">
+      <h3 class="text-xl font-semibold mt-4">Produto 7</h3>
+      <p class="text-green-600 font-bold text-lg mt-2">€55,00</p>
+      <button onclick="addToCart('Produto 7', 55, '1111.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+    </div>
+
+    <!-- Produto 8 -->
+    <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+      <img src="11111.PNG" alt="Produto 8" class="product-img rounded-lg">
+      <h3 class="text-xl font-semibold mt-4">Produto 8</h3>
+      <p class="text-green-600 font-bold text-lg mt-2">€60,00</p>
+      <button onclick="addToCart('Produto 8', 60, '11111.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+    </div>
+
+    <!-- Produto 9 -->
+    <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+      <img src="1115.PNG" alt="Produto 9" class="product-img rounded-lg">
+      <h3 class="text-xl font-semibold mt-4">Produto 9</h3>
+      <p class="text-green-600 font-bold text-lg mt-2">€65,00</p>
+      <button onclick="addToCart('Produto 9', 65, '1115.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+    </div>
+
+    <!-- Produto 10 -->
+    <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+      <img src="112.PNG" alt="Produto 10" class="product-img rounded-lg">
+      <h3 class="text-xl font-semibold mt-4">Produto 10</h3>
+      <p class="text-green-600 font-bold text-lg mt-2">€70,00</p>
+      <button onclick="addToCart('Produto 10', 70, '112.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+    </div>
+
+    <!-- Produto 11 -->
+    <div class="product-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105">
+      <img src="1212123.PNG" alt="Produto 11" class="product-img rounded-lg">
+      <h3 class="text-xl font-semibold mt-4">Produto 11</h3>
+      <p class="text-green-600 font-bold text-lg mt-2">€75,00</p>
+      <button onclick="addToCart('Produto 11', 75, '1212123.PNG')" class="cart-btn mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg">Adicionar ao Carrinho</button>
+    </div>
+
   </section>
 
-  <!-- Carrinho -->
-  <div id="cart" class="fixed top-4 right-4 bg-white shadow-xl rounded-xl p-6 w-80 max-h-[400px] overflow-y-auto scale-0 transition-transform transform origin-top-right">
-    <h2 class="text-xl font-bold mb-4">Carrinho</h2>
-    <ul id="cart-items" class="space-y-2"></ul>
-    <p class="mt-4 font-semibold">Total: €<span id="cart-total">0</span></p>
-    <button onclick="checkout()" class="mt-4 bg-orange-600 text-white w-full py-2 rounded-lg">Finalizar Pedido</button>
-  </div>
-
-  <!-- Rodapé -->
-  <footer class="footer">
-    <div class="max-w-screen-xl mx-auto px-6 text-center">
-      <p class="text-white text-lg">© 2023 Loja 3D. Todos os direitos reservados.</p>
-      <div class="mt-4">
-        <a href="#facebook" class="text-white hover:text-blue-400">Facebook</a>
-        <a href="#instagram" class="text-white hover:text-pink-400">Instagram</a>
-        <a href="#whatsapp" class="text-white hover:text-green-400">WhatsApp</a>
-      </div>
+  <!-- Footer -->
+  <footer class="footer text-center">
+    <div class="max-w-screen-xl mx-auto px-6">
+      <p>&copy; 2025 Loja 3D. Todos os direitos reservados.</p>
+      <p><a href="#home">Início</a> | <a href="#catalog">Catálogo</a> | <a href="#about">Sobre</a> | <a href="#contact">Contato</a></p>
     </div>
   </footer>
 
+  <!-- Script de Carrinho -->
   <script>
-    let cart = [];
-    let total = 0;
-
-    function addToCart(product, price, imgSrc) {
-      const item = { id: Date.now(), product, price, imgSrc, quantity: 1 };
-      cart.push(item);
-      total += price;
-      updateCart();
-    }
-
-    function removeFromCart(itemId) {
-      const itemIndex = cart.findIndex(item => item.id === itemId);
-      if (itemIndex > -1) {
-        total -= cart[itemIndex].price * cart[itemIndex].quantity;
-        cart.splice(itemIndex, 1);
-        updateCart();
-      }
-    }
-
-    function updateCart() {
-      const cartItems = document.getElementById('cart-items');
-      const cartTotal = document.getElementById('cart-total');
-      const cartElement = document.getElementById('cart');
-      cartItems.innerHTML = '';
-
-      cart.forEach(item => {
-        const li = document.createElement('li');
-        li.className = "flex justify-between items-center border-b pb-1";
-        li.innerHTML = `
-          <div class="flex items-center gap-2">
-            <img src="${item.imgSrc}" alt="${item.product}" class="w-12 h-12 rounded-lg object-cover">
-            <div>
-              <span class="font-semibold">${item.product}</span><br>
-              <span class="text-gray-600 text-sm">€${item.price} x ${item.quantity}</span>
-            </div>
-          </div>
-          <button onclick="removeFromCart(${item.id})" class="text-red-500 hover:text-red-700">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        `;
-        cartItems.appendChild(li);
-      });
-
-      cartTotal.textContent = total.toFixed(2);
-      cartElement.classList.add('scale-100');
-    }
-
-    function checkout() {
-      if (cart.length === 0) {
-        alert('O carrinho está vazio!');
-        return;
-      }
-      let message = 'Olá, gostaria de encomendar:\n';
-      cart.forEach(item => {
-        message += `- ${item.product} (€${item.price}) x ${item.quantity}\n`;
-      });
-      message += `Total: €${total.toFixed(2)}\n`;
-      const whatsapp = '351912345678'; // Altere para o seu número real
-      window.open(`https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
+    function addToCart(productName, price, imgSrc) {
+      alert(`${productName} foi adicionado ao carrinho. Preço: €${price}`);
     }
   </script>
+
 </body>
 </html>
