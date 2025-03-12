@@ -44,16 +44,13 @@
 
 </section>
 
-<!-- Carrinho -->
-<div id="cart" class="fixed top-4 right-4 bg-white shadow-xl rounded-xl p-6 w-80 max-h-[400px] overflow-y-auto">
+<!-- Carrinho (começa escondido) -->
+<div id="cart" class="hidden fixed top-4 right-4 bg-white shadow-xl rounded-xl p-6 w-80 max-h-[400px] overflow-y-auto">
   <h2 class="text-xl font-bold mb-4">Carrinho</h2>
   <ul id="cart-items" class="space-y-4"></ul>
   <p class="mt-4 font-semibold">Total: €<span id="cart-total">0.00</span></p>
   <button onclick="checkout()" class="mt-4 bg-orange-600 hover:bg-orange-700 text-white w-full py-2 rounded-lg">Finalizar Pedido</button>
 </div>
-
-<!-- Botão Carrinho Mobile -->
-<button onclick="toggleCart()" class="fixed bottom-4 right-4 bg-orange-600 text-white p-4 rounded-full shadow-lg sm:hidden">🛒</button>
 
 <script>
   let cart = [];
@@ -103,7 +100,15 @@
   function updateCart() {
     const cartItems = document.getElementById('cart-items');
     const cartTotal = document.getElementById('cart-total');
+    const cartDiv = document.getElementById('cart');
     cartItems.innerHTML = '';
+
+    // Mostrar carrinho se houver itens
+    if (cart.length > 0) {
+      cartDiv.classList.remove('hidden');
+    } else {
+      cartDiv.classList.add('hidden');
+    }
 
     cart.forEach(item => {
       let priceText = item.price > 0 ? '€' + (item.price * item.qty).toFixed(2) : 'Sob Orçamento';
@@ -150,11 +155,6 @@
     toast.textContent = message;
     toast.classList.remove('hidden');
     setTimeout(() => toast.classList.add('hidden'), 3000);
-  }
-
-  function toggleCart() {
-    const cartDiv = document.getElementById('cart');
-    cartDiv.classList.toggle('hidden');
   }
 </script>
 
