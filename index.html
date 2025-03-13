@@ -4,18 +4,6 @@
   <meta charset="UTF-8">
   <title>Loja Simples</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* Animação ao adicionar produto */
-    .add-animation {
-      animation: bounce 0.4s ease;
-    }
-
-    @keyframes bounce {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
-    }
-  </style>
 </head>
 <body class="bg-gray-100">
 
@@ -24,11 +12,13 @@
 
     <div id="product-list" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
 
-    <h2 class="text-2xl font-bold mt-8">Carrinho</h2>
-    <div id="cart" class="bg-white p-4 rounded shadow mt-2"></div>
-    <div id="cart-total" class="text-xl font-bold mt-2"></div>
-    <button onclick="clearCart()" class="mt-4 bg-red-500 text-white px-4 py-2 rounded">Esvaziar Carrinho</button>
-    <button onclick="checkout()" class="mt-4 bg-green-500 text-white px-4 py-2 rounded ml-2">Finalizar Pedido (MB WAY)</button>
+    <div id="cart-section" class="mt-8 hidden">
+      <h2 class="text-2xl font-bold">Carrinho</h2>
+      <div id="cart" class="bg-white p-4 rounded shadow mt-2"></div>
+      <div id="cart-total" class="text-xl font-bold mt-2"></div>
+      <button onclick="clearCart()" class="mt-4 bg-red-500 text-white px-4 py-2 rounded">Esvaziar Carrinho</button>
+      <button onclick="checkout()" class="mt-4 bg-green-500 text-white px-4 py-2 rounded ml-2">Finalizar Pedido (MB WAY)</button>
+    </div>
   </div>
 
   <script>
@@ -49,7 +39,9 @@
     const productList = document.getElementById('product-list');
     const cartElement = document.getElementById('cart');
     const cartTotalElement = document.getElementById('cart-total');
+    const cartSection = document.getElementById('cart-section');
 
+    // Criar lista de produtos
     products.forEach((product, index) => {
       const productCard = document.createElement('div');
       productCard.className = 'bg-white p-2 rounded shadow flex flex-col items-center';
@@ -63,7 +55,7 @@
       button.textContent = 'Adicionar ao Carrinho';
       button.className = 'bg-blue-500 text-white px-2 py-1 rounded';
       button.onclick = () => {
-        addToCart(index, button);
+        addToCart(index);
       };
 
       productCard.appendChild(img);
@@ -71,10 +63,8 @@
       productList.appendChild(productCard);
     });
 
-    function addToCart(index, button) {
-      button.classList.add('add-animation'); // Animação no botão
-      setTimeout(() => button.classList.remove('add-animation'), 400); // Remover classe após a animação
-
+    // Função adicionar ao carrinho
+    function addToCart(index) {
       const existingItem = cart.find(item => item.id === index);
       if (existingItem) {
         existingItem.quantity++;
@@ -82,27 +72,35 @@
         cart.push({ id: index, name: products[index], quantity: 1 });
       }
       updateCart();
+      cartSection.classList.remove('hidden');
     }
 
+    // Função remover do carrinho
     function removeFromCart(index) {
       const itemIndex = cart.findIndex(item => item.id === index);
       if (itemIndex !== -1) {
         cart.splice(itemIndex, 1);
         updateCart();
+        if (cart.length === 0) {
+          cartSection.classList.add('hidden');
+        }
       }
     }
 
+    // Função esvaziar carrinho
     function clearCart() {
       cart.length = 0;
       total = 0;
       updateCart();
+      cartSection.classList.add('hidden');
     }
 
+    // Atualizar carrinho
     function updateCart() {
       cartElement.innerHTML = '';
       total = 0;
       cart.forEach(item => {
-        total += item.quantity * 1; // Preço fixo de 1€
+        total += item.quantity * 1; // Preço fixo 1€
 
         const cartItem = document.createElement('div');
         cartItem.className = 'flex justify-between items-center mb-2';
@@ -117,6 +115,7 @@
       cartTotalElement.textContent = 'Total: ' + total.toFixed(2) + ' €';
     }
 
+    // Finalizar pedido MB WAY
     function checkout() {
       if (cart.length === 0) {
         alert('O carrinho está vazio!');
@@ -129,7 +128,7 @@
       });
       message += `%0ATotal: ${total.toFixed(2)} €%0A%0AEnviar comprovativo MB WAY para o número: 912345678`;
 
-      const phoneNumber = '351912345678'; // Substitui por o teu número MB WAY
+      const phoneNumber = '351912345678'; // Substituir pelo teu número MB WAY
       const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
       window.open(whatsappURL, '_blank');
     }
