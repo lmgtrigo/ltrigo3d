@@ -78,6 +78,8 @@
         cart.push({ product, quantity: 1 });
       }
       updateCart();
+      // Mostrar o painel do carrinho automaticamente quando adicionar um produto
+      document.getElementById('cart-panel').classList.remove('hidden');
     }
 
     // Atualizar visualização do carrinho, incluindo foto do produto
@@ -92,10 +94,9 @@
         total += itemTotal;
         count += item.quantity;
 
-        // Criação do elemento para o item no carrinho com foto
+        // Criar elemento para o item do carrinho com foto
         const cartItem = document.createElement('div');
         cartItem.className = 'flex items-center justify-between border-b py-2';
-
         cartItem.innerHTML = `
           <div class="flex items-center space-x-2">
             <img src="${item.product}" alt="${item.product}" class="w-16 h-16 object-cover rounded">
@@ -112,7 +113,7 @@
       document.getElementById('cart-total').innerText = 'Total: ' + total.toFixed(2) + ' €';
       document.getElementById('cart-count').innerText = count;
 
-      // Esconder painel se carrinho estiver vazio
+      // Se o carrinho estiver vazio, esconder o painel
       if (cart.length === 0) {
         document.getElementById('cart-panel').classList.add('hidden');
       }
