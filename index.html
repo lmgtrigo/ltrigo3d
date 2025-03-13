@@ -24,20 +24,42 @@
       <div id="cart-total" class="text-xl font-bold mt-4"></div>
       <div class="flex mt-4 space-x-4">
         <button onclick="clearCart()" class="bg-red-500 text-white px-4 py-2 rounded w-full">Esvaziar Carrinho</button>
-        <button onclick="checkout()" class="bg-green-500 text-white px-4 py-2 rounded w-full">Finalizar Pedido (MB WAY)</button>
+        <button onclick="checkout()" class="bg-green-500 text-white px-4 py-2 rounded w-full">Finalizar Pedido (WhatsApp)</button>
       </div>
     </div>
   </div>
 
   <script>
-    // Lista de produtos
+    // Lista completa dos produtos
     const products = [
-      "1000.png", "11.PNG", "111.PNG", "apple.PNG" // Podes adicionar mais, testei com poucos para ver se funciona primeiro
+      "1000.png", "11.PNG", "111.PNG", "1111.PNG", "11111.PNG", "1115.PNG", "112.PNG", "12.PNG", "1212123.PNG", "13.PNG",
+      "14.PNG", "21111.PNG", "212111.PNG", "2122.PNG", "21231.PNG", "2222.PNG", "22222.PNG", "2323.PNG", "2323232.PNG", "3131111.PNG",
+      "31312.PNG", "4211.PNG", "42134234.PNG", "42333.PNG", "4322111.PNG", "43222.PNG", "44.PNG", "45.PNG", "453645.PNG", "46.PNG",
+      "47.PNG", "48.PNG", "49.PNG", "50.PNG", "51.PNG", "52.PNG", "53.PNG", "54.PNG", "54222.PNG", "55.PNG", "56.PNG", "57.PNG",
+      "58.PNG", "59.PNG", "61.PNG", "62.PNG", "63.PNG", "64.PNG", "65.PNG", "65234223.PNG", "656554.PNG", "66.PNG", "67.PNG",
+      "86856.PNG", "87878.PNG", "87878787.PNG", "8977.PNG", "987987.PNG", "Captu1re.PNG", "IMG_20250213_204047.jpg", "IMG_20250302_204523.jpg", "IMG_20250304_122348.jpg", "apple.PNG"
     ];
-    const cart = [];
-    const productPrice = 34.90;
 
-    // Adicionar produto ao carrinho
+    const cart = [];
+    const productPrice = 34.90; // Preço fixo
+
+    // Renderizar Produtos
+    function renderProducts() {
+      const productList = document.getElementById('product-list');
+      products.forEach(product => {
+        const productCard = document.createElement('div');
+        productCard.className = 'bg-white p-2 rounded shadow';
+        productCard.innerHTML = `
+          <img src="${product}" alt="${product}" class="w-full h-56 object-cover rounded">
+          <p class="mt-2 text-center font-bold">${productPrice.toFixed(2)} €</p>
+          <button class="mt-2 bg-blue-500 text-white w-full py-1 rounded">Adicionar</button>
+        `;
+        productCard.querySelector('button').addEventListener('click', () => addToCart(product));
+        productList.appendChild(productCard);
+      });
+    }
+
+    // Adicionar ao Carrinho
     function addToCart(product) {
       const existing = cart.find(item => item.product === product);
       if (existing) {
@@ -49,18 +71,16 @@
       document.getElementById('cart-section').classList.remove('hidden');
     }
 
-    // Atualizar carrinho
+    // Atualizar Carrinho
     function updateCart() {
       const cartElement = document.getElementById('cart');
-      cartElement.innerHTML = ''; // Limpa o carrinho antes de renderizar
-
+      cartElement.innerHTML = '';
       let total = 0;
 
       cart.forEach((item, index) => {
         const itemTotal = item.quantity * productPrice;
         total += itemTotal;
 
-        // Mostra produto e quantidade
         const cartItem = document.createElement('div');
         cartItem.className = 'flex justify-between items-center border-b py-2';
         cartItem.innerHTML = `
@@ -72,55 +92,51 @@
 
       document.getElementById('cart-total').innerText = 'Total: ' + total.toFixed(2) + ' €';
 
-      // Se o carrinho estiver vazio, esconder
       if (cart.length === 0) {
         document.getElementById('cart-section').classList.add('hidden');
       }
     }
 
-    // Remover item do carrinho
+    // Remover Produto
     function removeFromCart(index) {
       cart.splice(index, 1);
       updateCart();
     }
 
-    // Esvaziar carrinho
+    // Esvaziar Carrinho
     function clearCart() {
       cart.length = 0;
       updateCart();
     }
 
-    // Finalizar compra
+    // Finalizar Compra e enviar para WhatsApp
     function checkout() {
-      const total = cart.reduce((sum, item) => sum + item.quantity * productPrice, 0);
-      alert('Pedido MB WAY no valor de ' + total.toFixed(2) + ' € foi gerado!');
+      if (cart.length === 0) {
+        alert('Carrinho vazio!');
+        return;
+      }
+
+      let message = "Olá! Gostaria de fazer a seguinte encomenda:%0A%0A";
+      let total = 0;
+
+      cart.forEach(item => {
+        const itemTotal = item.quantity * productPrice;
+        total += itemTotal;
+        message += `🛒 ${item.product} (x${item.quantity}) - ${itemTotal.toFixed(2)} €%0A`;
+      });
+
+      message += `%0ATotal: ${total.toFixed(2)} €%0A%0AObrigado!`;
+
+      const phoneNumber = "351912345678"; // <-- Teu número com indicativo internacional (ex: +351 sem o +)
+      const whatsappLink = `https://wa.me/${phoneNumber}?text=${message}`;
+
+      window.open(whatsappLink, '_blank');
+
       clearCart();
     }
 
-    // Renderizar produtos
-    function renderProducts() {
-      const productList = document.getElementById('product-list');
-      productList.innerHTML = ''; // Limpar antes de renderizar
-
-      products.forEach(product => {
-        const productCard = document.createElement('div');
-        productCard.className = 'bg-white p-2 rounded shadow';
-        productCard.innerHTML = `
-          <img src="${product}" alt="${product}" class="w-full h-56 object-cover rounded">
-          <p class="mt-2 text-center font-bold">${productPrice.toFixed(2)} €</p>
-          <button class="mt-2 bg-blue-500 text-white w-full py-1 rounded">Adicionar</button>
-        `;
-
-        // Adicionar evento ao botão
-        productCard.querySelector('button').addEventListener('click', () => addToCart(product));
-
-        productList.appendChild(productCard);
-      });
-    }
-
-    // Chamar a função para renderizar os produtos ao carregar a página
+    // Renderizar ao iniciar
     renderProducts();
-
   </script>
 
 </body>
