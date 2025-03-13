@@ -5,7 +5,7 @@
   <title>Loja Online</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Pequeno ajuste para o carrinho flutuar por cima do conteúdo */
+    /* Garantir que o carrinho fique por cima do conteúdo */
     #cart-widget {
       z-index: 50;
     }
@@ -18,7 +18,7 @@
     <button id="cart-toggle" onclick="toggleCart()" class="bg-blue-500 text-white px-4 py-2 rounded relative shadow">
       Carrinho (<span id="cart-count">0</span>)
     </button>
-    <div id="cart-panel" class="hidden mt-2 bg-white shadow-lg rounded p-4 w-72">
+    <div id="cart-panel" class="hidden mt-2 bg-white shadow-lg rounded p-4 w-80">
       <div id="cart-items"></div>
       <div id="cart-total" class="font-bold mt-2"></div>
       <div class="mt-4 space-y-2">
@@ -80,7 +80,7 @@
       updateCart();
     }
 
-    // Atualizar visualização do carrinho e a contagem
+    // Atualizar visualização do carrinho, incluindo foto do produto
     function updateCart() {
       const cartItemsElement = document.getElementById('cart-items');
       cartItemsElement.innerHTML = '';
@@ -92,10 +92,18 @@
         total += itemTotal;
         count += item.quantity;
 
+        // Criação do elemento para o item no carrinho com foto
         const cartItem = document.createElement('div');
-        cartItem.className = 'flex justify-between items-center border-b py-2';
+        cartItem.className = 'flex items-center justify-between border-b py-2';
+
         cartItem.innerHTML = `
-          <span>${item.product} (x${item.quantity}) - ${itemTotal.toFixed(2)} €</span>
+          <div class="flex items-center space-x-2">
+            <img src="${item.product}" alt="${item.product}" class="w-16 h-16 object-cover rounded">
+            <div>
+              <div class="font-bold">${item.product}</div>
+              <div class="text-sm">x${item.quantity} - ${itemTotal.toFixed(2)} €</div>
+            </div>
+          </div>
           <button onclick="removeFromCart(${index})" class="bg-red-400 text-white px-2 py-1 rounded">Remover</button>
         `;
         cartItemsElement.appendChild(cartItem);
@@ -103,8 +111,8 @@
 
       document.getElementById('cart-total').innerText = 'Total: ' + total.toFixed(2) + ' €';
       document.getElementById('cart-count').innerText = count;
-      
-      // Se não houver itens, fechar o painel do carrinho
+
+      // Esconder painel se carrinho estiver vazio
       if (cart.length === 0) {
         document.getElementById('cart-panel').classList.add('hidden');
       }
@@ -144,7 +152,7 @@
       clearCart();
     }
 
-    // Toggle do painel do carrinho (abre/fecha)
+    // Alternar exibição do painel do carrinho (abre/fecha)
     function toggleCart() {
       const panel = document.getElementById('cart-panel');
       panel.classList.toggle('hidden');
