@@ -2,120 +2,137 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Loja 3D - Produtos</title>
+  <title>Loja Simples</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .product-card:hover { transform: translateY(-8px); }
-    .cart-btn:hover { background-color: #f97316; }
-    .product-img { height: 200px; width: 100%; object-fit: cover; }
+    /* Animação ao adicionar produto */
+    .add-animation {
+      animation: bounce 0.4s ease;
+    }
+
+    @keyframes bounce {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
   </style>
 </head>
 <body class="bg-gray-100">
 
-  <!-- Header -->
-  <header class="bg-black text-white py-6">
-    <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-      <h1 class="text-3xl font-bold">🛍️ Loja 3D</h1>
-    </div>
-  </header>
+  <div class="container mx-auto p-4">
+    <h1 class="text-3xl font-bold mb-4 text-center">Produtos</h1>
 
-  <!-- Produtos -->
-  <section id="catalog" class="max-w-7xl mx-auto py-12 px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-    <!-- Produtos automáticos -->
-    <script>
-      const products = [
-        "1000.png", "11.PNG", "111.PNG", "1111.PNG", "11111.PNG", "1115.PNG", "112.PNG", "12.PNG", "1212123.PNG", 
-        "13.PNG", "14.PNG", "21111.PNG", "212111.PNG", "2122.PNG", "21231.PNG", "2222.PNG", "22222.PNG", "2323.PNG", 
-        "2323232.PNG", "3131111.PNG", "31312.PNG", "4211.PNG", "42134234.PNG", "42333.PNG", "4322111.PNG", "43222.PNG", 
-        "44.PNG", "45.PNG", "453645.PNG", "46.PNG", "47.PNG", "48.PNG", "49.PNG", "50.PNG", "51.PNG", "52.PNG", "53.PNG", 
-        "54.PNG", "54222.PNG", "55.PNG", "56.PNG", "57.PNG", "58.PNG", "59.PNG", "61.PNG", "62.PNG", "63.PNG", "64.PNG", 
-        "65.PNG", "65234223.PNG", "656554.PNG", "66.PNG", "67.PNG", "86856.PNG", "87878.PNG", "87878787.PNG", "8977.PNG", 
-        "987987.PNG", "Captu1re.PNG", "IMG_20250213_204047.jpg", "IMG_20250302_204523.jpg", "IMG_20250304_122348.jpg", "apple.PNG"
-      ];
+    <div id="product-list" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
 
-      products.forEach((img, index) => {
-        document.write(`
-          <div class="product-card bg-white rounded-xl shadow-lg p-4 flex flex-col items-center transition-transform">
-            <img src="${img}" alt="Produto ${index + 1}" class="product-img rounded-md">
-            <h3 class="text-lg font-semibold mt-3">Produto ${index + 1}</h3>
-            <p class="text-green-600 font-bold text-lg mt-1">€${(index + 1) * 5},00</p>
-            <button onclick="addToCart('Produto ${index + 1}', ${(index + 1) * 5}, '${img}')" 
-              class="cart-btn mt-3 bg-orange-500 text-white py-2 px-4 rounded-md w-full">Adicionar ao Carrinho</button>
-          </div>
-        `);
-      });
-    </script>
-  </section>
-
-  <!-- Carrinho -->
-  <div id="cart" class="fixed top-4 right-4 bg-white shadow-2xl rounded-xl p-6 w-80 max-h-[400px] overflow-y-auto scale-0 transition-transform origin-top-right z-50">
-    <h2 class="text-xl font-bold mb-4">Carrinho</h2>
-    <ul id="cart-items" class="space-y-3"></ul>
-    <p class="mt-4 font-semibold">Total: €<span id="cart-total">0.00</span></p>
-    <button onclick="checkout()" class="mt-4 bg-green-600 hover:bg-green-700 text-white w-full py-2 rounded-lg">Finalizar Pedido</button>
+    <h2 class="text-2xl font-bold mt-8">Carrinho</h2>
+    <div id="cart" class="bg-white p-4 rounded shadow mt-2"></div>
+    <div id="cart-total" class="text-xl font-bold mt-2"></div>
+    <button onclick="clearCart()" class="mt-4 bg-red-500 text-white px-4 py-2 rounded">Esvaziar Carrinho</button>
+    <button onclick="checkout()" class="mt-4 bg-green-500 text-white px-4 py-2 rounded ml-2">Finalizar Pedido (MB WAY)</button>
   </div>
 
-  <!-- Script Carrinho -->
   <script>
-    let cart = [];
+    const products = [
+      '1000.png', '11.PNG', '111.PNG', '1111.PNG', '11111.PNG', '1115.PNG', '112.PNG', '12.PNG',
+      '1212123.PNG', '13.PNG', '14.PNG', '21111.PNG', '212111.PNG', '2122.PNG', '21231.PNG', '2222.PNG',
+      '22222.PNG', '2323.PNG', '2323232.PNG', '3131111.PNG', '31312.PNG', '4211.PNG', '42134234.PNG', '42333.PNG',
+      '4322111.PNG', '43222.PNG', '44.PNG', '45.PNG', '453645.PNG', '46.PNG', '47.PNG', '48.PNG', '49.PNG', '50.PNG',
+      '51.PNG', '52.PNG', '53.PNG', '54.PNG', '54222.PNG', '55.PNG', '56.PNG', '57.PNG', '58.PNG', '59.PNG', '61.PNG',
+      '62.PNG', '63.PNG', '64.PNG', '65.PNG', '65234223.PNG', '656554.PNG', '66.PNG', '67.PNG', '86856.PNG', '87878.PNG',
+      '87878787.PNG', '8977.PNG', '987987.PNG', 'Captu1re.PNG', 'IMG_20250213_204047.jpg', 'IMG_20250302_204523.jpg',
+      'IMG_20250304_122348.jpg', 'apple.PNG'
+    ];
+
+    const cart = [];
     let total = 0;
 
-    function addToCart(product, price, imgSrc) {
-      const existingItem = cart.find(item => item.product === product);
+    const productList = document.getElementById('product-list');
+    const cartElement = document.getElementById('cart');
+    const cartTotalElement = document.getElementById('cart-total');
+
+    products.forEach((product, index) => {
+      const productCard = document.createElement('div');
+      productCard.className = 'bg-white p-2 rounded shadow flex flex-col items-center';
+
+      const img = document.createElement('img');
+      img.src = product;
+      img.alt = 'Produto';
+      img.className = 'w-full h-32 object-contain mb-2';
+
+      const button = document.createElement('button');
+      button.textContent = 'Adicionar ao Carrinho';
+      button.className = 'bg-blue-500 text-white px-2 py-1 rounded';
+      button.onclick = () => {
+        addToCart(index, button);
+      };
+
+      productCard.appendChild(img);
+      productCard.appendChild(button);
+      productList.appendChild(productCard);
+    });
+
+    function addToCart(index, button) {
+      button.classList.add('add-animation'); // Animação no botão
+      setTimeout(() => button.classList.remove('add-animation'), 400); // Remover classe após a animação
+
+      const existingItem = cart.find(item => item.id === index);
       if (existingItem) {
-        existingItem.quantity += 1;
+        existingItem.quantity++;
       } else {
-        cart.push({ id: Date.now(), product, price, imgSrc, quantity: 1 });
+        cart.push({ id: index, name: products[index], quantity: 1 });
       }
-      total += price;
       updateCart();
     }
 
-    function removeFromCart(itemId) {
-      const itemIndex = cart.findIndex(item => item.id === itemId);
-      if (itemIndex > -1) {
-        total -= cart[itemIndex].price * cart[itemIndex].quantity;
+    function removeFromCart(index) {
+      const itemIndex = cart.findIndex(item => item.id === index);
+      if (itemIndex !== -1) {
         cart.splice(itemIndex, 1);
         updateCart();
       }
     }
 
+    function clearCart() {
+      cart.length = 0;
+      total = 0;
+      updateCart();
+    }
+
     function updateCart() {
-      const cartItems = document.getElementById('cart-items');
-      const cartTotal = document.getElementById('cart-total');
-      const cartElement = document.getElementById('cart');
-      cartItems.innerHTML = '';
-
+      cartElement.innerHTML = '';
+      total = 0;
       cart.forEach(item => {
-        const li = document.createElement('li');
-        li.className = "flex justify-between items-center";
-        li.innerHTML = `
-          <div class="flex items-center gap-3">
-            <img src="${item.imgSrc}" alt="${item.product}" class="w-12 h-12 rounded-md object-cover">
-            <div>
-              <span class="font-semibold">${item.product}</span><br>
-              <span class="text-gray-600 text-sm">€${item.price} x ${item.quantity}</span>
-            </div>
-          </div>
-          <button onclick="removeFromCart(${item.id})" class="text-red-500 hover:text-red-700">&times;</button>
-        `;
-        cartItems.appendChild(li);
-      });
+        total += item.quantity * 1; // Preço fixo de 1€
 
-      cartTotal.textContent = total.toFixed(2);
-      cartElement.classList.toggle('scale-0', cart.length === 0);
+        const cartItem = document.createElement('div');
+        cartItem.className = 'flex justify-between items-center mb-2';
+
+        cartItem.innerHTML = `
+          <span>${item.name} x ${item.quantity}</span>
+          <button onclick="removeFromCart(${item.id})" class="bg-red-500 text-white px-2 py-1 rounded">Remover</button>
+        `;
+
+        cartElement.appendChild(cartItem);
+      });
+      cartTotalElement.textContent = 'Total: ' + total.toFixed(2) + ' €';
     }
 
     function checkout() {
-      if (cart.length === 0) return alert('Carrinho vazio!');
-      let message = 'Olá, gostaria de encomendar:\n';
-      cart.forEach(item => message += `- ${item.product} (€${item.price}) x ${item.quantity}\n`);
-      message += `Total: €${total.toFixed(2)}\n`;
-      const whatsapp = '351934667623';
-      window.open(`https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
+      if (cart.length === 0) {
+        alert('O carrinho está vazio!');
+        return;
+      }
+
+      let message = 'Pedido via MB WAY:%0A';
+      cart.forEach(item => {
+        message += `${item.name} x ${item.quantity}%0A`;
+      });
+      message += `%0ATotal: ${total.toFixed(2)} €%0A%0AEnviar comprovativo MB WAY para o número: 912345678`;
+
+      const phoneNumber = '351912345678'; // Substitui por o teu número MB WAY
+      const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+      window.open(whatsappURL, '_blank');
     }
   </script>
-
 </body>
 </html>
