@@ -1,503 +1,135 @@
-
 <!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <title>Loja Online</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loja 3D - Produtos Exclusivos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .product-card:hover { transform: translateY(-8px); }
+    .cart-btn:hover { background-color: #f97316; }
+    .product-img { height: 200px; object-fit: cover; }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Header -->
+  <header class="bg-black text-white py-6">
+    <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+      <h1 class="text-3xl font-bold">🛒 Loja 3D</h1>
+      <nav class="space-x-6 text-lg">
+        <a href="#catalog" class="hover:underline">Catálogo</a>
+        <a href="#contact" class="hover:underline">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Produtos -->
+  <section id="catalog" class="max-w-7xl mx-auto py-12 px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    <!-- Produtos gerados automaticamente -->
+    <!-- Aqui começa o loop dos produtos -->
+    <script>
+      const products = [
+        "1000.png", "11.PNG", "111.PNG", "1111.PNG", "11111.PNG", "1115.PNG", "112.PNG", "12.PNG", "1212123.PNG", 
+        "13.PNG", "14.PNG", "21111.PNG", "212111.PNG", "2122.PNG", "21231.PNG", "2222.PNG", "22222.PNG", "2323.PNG", 
+        "2323232.PNG", "3131111.PNG", "31312.PNG", "4211.PNG", "42134234.PNG", "42333.PNG", "4322111.PNG", "43222.PNG", 
+        "44.PNG", "45.PNG", "453645.PNG", "46.PNG", "47.PNG", "48.PNG", "49.PNG", "50.PNG", "51.PNG", "52.PNG", "53.PNG", 
+        "54.PNG", "54222.PNG", "55.PNG", "56.PNG", "57.PNG", "58.PNG", "59.PNG", "61.PNG", "62.PNG", "63.PNG", "64.PNG", 
+        "65.PNG", "65234223.PNG", "656554.PNG", "66.PNG", "67.PNG", "86856.PNG", "87878.PNG", "87878787.PNG", "8977.PNG", 
+        "987987.PNG", "Captu1re.PNG", "IMG_20250213_204047.jpg", "IMG_20250302_204523.jpg", "IMG_20250304_122348.jpg", "apple.PNG"
+      ];
+
+      products.forEach((img, index) => {
+        document.write(`
+          <div class="product-card bg-white rounded-xl shadow-lg p-4 flex flex-col items-center transition-transform">
+            <img src="${img}" alt="Produto ${index + 1}" class="product-img rounded-md w-full">
+            <h3 class="text-lg font-semibold mt-3">Produto ${index + 1}</h3>
+            <p class="text-green-600 font-bold text-lg mt-1">€${(index + 1) * 5},00</p>
+            <button onclick="addToCart('Produto ${index + 1}', ${(index + 1) * 5}, '${img}')" 
+              class="cart-btn mt-3 bg-orange-500 text-white py-2 px-4 rounded-md w-full">Adicionar ao Carrinho</button>
+          </div>
+        `);
+      });
+    </script>
+  </section>
+
+  <!-- Carrinho -->
+  <div id="cart" class="fixed top-4 right-4 bg-white shadow-2xl rounded-xl p-6 w-80 max-h-[400px] overflow-y-auto scale-0 transition-transform origin-top-right z-50">
+    <h2 class="text-xl font-bold mb-4">Carrinho</h2>
+    <ul id="cart-items" class="space-y-3"></ul>
+    <p class="mt-4 font-semibold">Total: €<span id="cart-total">0.00</span></p>
+    <button onclick="checkout()" class="mt-4 bg-green-600 hover:bg-green-700 text-white w-full py-2 rounded-lg">Finalizar Pedido</button>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-black text-white py-6 mt-12">
+    <div class="max-w-7xl mx-auto text-center">
+      <p>© 2024 Loja 3D. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Script Carrinho -->
   <script>
     let cart = [];
+    let total = 0;
 
-    function addToCart(name, price, img) {
-      const existingItem = cart.find(item => item.name === name);
+    function addToCart(product, price, imgSrc) {
+      const existingItem = cart.find(item => item.product === product);
       if (existingItem) {
-        existingItem.quantity++;
+        existingItem.quantity += 1;
       } else {
-        cart.push({ name, price, img, quantity: 1 });
+        cart.push({ id: Date.now(), product, price, imgSrc, quantity: 1 });
       }
-      document.getElementById('cart').classList.remove('hidden');
-      renderCart();
+      total += price;
+      updateCart();
     }
 
-    function removeFromCart(name) {
-      cart = cart.filter(item => item.name !== name);
-      renderCart();
-      if (cart.length === 0) {
-        document.getElementById('cart').classList.add('hidden');
+    function removeFromCart(itemId) {
+      const itemIndex = cart.findIndex(item => item.id === itemId);
+      if (itemIndex > -1) {
+        total -= cart[itemIndex].price * cart[itemIndex].quantity;
+        cart.splice(itemIndex, 1);
+        updateCart();
       }
     }
 
-    function renderCart() {
+    function updateCart() {
       const cartItems = document.getElementById('cart-items');
+      const cartTotal = document.getElementById('cart-total');
+      const cartElement = document.getElementById('cart');
       cartItems.innerHTML = '';
-      let total = 0;
 
       cart.forEach(item => {
-        total += item.price * item.quantity;
-        cartItems.innerHTML += `
-          <div class="flex justify-between items-center mb-2">
-            <img src="${item.img}" alt="${item.name}" class="w-10 h-10 object-cover rounded">
-            <span>${item.name} (x${item.quantity}) - €${item.price.toFixed(2)}</span>
-            <button onclick="removeFromCart('${item.name}')" class="bg-red-500 text-white px-2 py-1 rounded">Remover</button>
+        const li = document.createElement('li');
+        li.className = "flex justify-between items-center";
+        li.innerHTML = `
+          <div class="flex items-center gap-3">
+            <img src="${item.imgSrc}" alt="${item.product}" class="w-12 h-12 rounded-md object-cover">
+            <div>
+              <span class="font-semibold">${item.product}</span><br>
+              <span class="text-gray-600 text-sm">€${item.price} x ${item.quantity}</span>
+            </div>
           </div>
+          <button onclick="removeFromCart(${item.id})" class="text-red-500 hover:text-red-700">
+            &times;
+          </button>
         `;
+        cartItems.appendChild(li);
       });
 
-      document.getElementById('cart-total').innerText = 'Total: €' + total.toFixed(2);
+      cartTotal.textContent = total.toFixed(2);
+      cartElement.classList.toggle('scale-0', cart.length === 0);
+    }
+
+    function checkout() {
+      if (cart.length === 0) return alert('Carrinho vazio!');
+      let message = 'Olá, gostaria de encomendar:\n';
+      cart.forEach(item => message += `- ${item.product} (€${item.price}) x ${item.quantity}\n`);
+      message += `Total: €${total.toFixed(2)}\n`;
+      const whatsapp = '351912345678';
+      window.open(`https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
     }
   </script>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 p-8">
 
-  <div id="cart" class="fixed top-4 right-4 bg-white shadow-lg rounded-lg p-4 hidden">
-    <h2 class="text-lg font-bold mb-2">Carrinho de Compras</h2>
-    <div id="cart-items"></div>
-    <p id="cart-total" class="font-bold mt-2">Total: €0.00</p>
-  </div>
-
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="1000.png" alt="1000.png" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">1000.png</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('1000.png', 10, '1000.png')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="11.PNG" alt="11.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">11.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('11.PNG', 10, '11.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="111.PNG" alt="111.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">111.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('111.PNG', 10, '111.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="1111.PNG" alt="1111.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">1111.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('1111.PNG', 10, '1111.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="11111.PNG" alt="11111.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">11111.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('11111.PNG', 10, '11111.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="1115.PNG" alt="1115.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">1115.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('1115.PNG', 10, '1115.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="112.PNG" alt="112.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">112.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('112.PNG', 10, '112.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="12.PNG" alt="12.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">12.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('12.PNG', 10, '12.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="1212123.PNG" alt="1212123.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">1212123.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('1212123.PNG', 10, '1212123.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="13.PNG" alt="13.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">13.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('13.PNG', 10, '13.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="14.PNG" alt="14.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">14.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('14.PNG', 10, '14.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="21111.PNG" alt="21111.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">21111.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('21111.PNG', 10, '21111.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="212111.PNG" alt="212111.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">212111.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('212111.PNG', 10, '212111.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="2122.PNG" alt="2122.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">2122.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('2122.PNG', 10, '2122.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="21231.PNG" alt="21231.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">21231.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('21231.PNG', 10, '21231.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="2222.PNG" alt="2222.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">2222.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('2222.PNG', 10, '2222.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="22222.PNG" alt="22222.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">22222.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('22222.PNG', 10, '22222.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="2323.PNG" alt="2323.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">2323.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('2323.PNG', 10, '2323.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="2323232.PNG" alt="2323232.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">2323232.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('2323232.PNG', 10, '2323232.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="3131111.PNG" alt="3131111.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">3131111.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('3131111.PNG', 10, '3131111.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="31312.PNG" alt="31312.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">31312.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('31312.PNG', 10, '31312.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="4211.PNG" alt="4211.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">4211.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('4211.PNG', 10, '4211.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="42134234.PNG" alt="42134234.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">42134234.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('42134234.PNG', 10, '42134234.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="42333.PNG" alt="42333.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">42333.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('42333.PNG', 10, '42333.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="4322111.PNG" alt="4322111.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">4322111.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('4322111.PNG', 10, '4322111.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="43222.PNG" alt="43222.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">43222.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('43222.PNG', 10, '43222.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="44.PNG" alt="44.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">44.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('44.PNG', 10, '44.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="45.PNG" alt="45.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">45.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('45.PNG', 10, '45.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="453645.PNG" alt="453645.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">453645.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('453645.PNG', 10, '453645.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="46.PNG" alt="46.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">46.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('46.PNG', 10, '46.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="47.PNG" alt="47.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">47.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('47.PNG', 10, '47.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="48.PNG" alt="48.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">48.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('48.PNG', 10, '48.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="49.PNG" alt="49.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">49.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('49.PNG', 10, '49.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="50.PNG" alt="50.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">50.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('50.PNG', 10, '50.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="51.PNG" alt="51.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">51.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('51.PNG', 10, '51.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="52.PNG" alt="52.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">52.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('52.PNG', 10, '52.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="53.PNG" alt="53.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">53.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('53.PNG', 10, '53.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="54.PNG" alt="54.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">54.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('54.PNG', 10, '54.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="54222.PNG" alt="54222.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">54222.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('54222.PNG', 10, '54222.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="55.PNG" alt="55.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">55.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('55.PNG', 10, '55.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="56.PNG" alt="56.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">56.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('56.PNG', 10, '56.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="57.PNG" alt="57.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">57.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('57.PNG', 10, '57.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="58.PNG" alt="58.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">58.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('58.PNG', 10, '58.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="59.PNG" alt="59.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">59.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('59.PNG', 10, '59.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="61.PNG" alt="61.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">61.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('61.PNG', 10, '61.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="62.PNG" alt="62.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">62.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('62.PNG', 10, '62.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="63.PNG" alt="63.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">63.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('63.PNG', 10, '63.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="64.PNG" alt="64.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">64.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('64.PNG', 10, '64.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="65.PNG" alt="65.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">65.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('65.PNG', 10, '65.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="65234223.PNG" alt="65234223.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">65234223.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('65234223.PNG', 10, '65234223.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="656554.PNG" alt="656554.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">656554.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('656554.PNG', 10, '656554.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="66.PNG" alt="66.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">66.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('66.PNG', 10, '66.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="67.PNG" alt="67.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">67.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('67.PNG', 10, '67.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="86856.PNG" alt="86856.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">86856.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('86856.PNG', 10, '86856.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="87878.PNG" alt="87878.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">87878.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('87878.PNG', 10, '87878.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="87878787.PNG" alt="87878787.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">87878787.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('87878787.PNG', 10, '87878787.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="8977.PNG" alt="8977.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">8977.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('8977.PNG', 10, '8977.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="987987.PNG" alt="987987.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">987987.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('987987.PNG', 10, '987987.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="Captu1re.PNG" alt="Captu1re.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">Captu1re.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('Captu1re.PNG', 10, 'Captu1re.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="IMG_20250213_204047.jpg" alt="IMG_20250213_204047.jpg" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">IMG_20250213_204047.jpg</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('IMG_20250213_204047.jpg', 10, 'IMG_20250213_204047.jpg')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="IMG_20250302_204523.jpg" alt="IMG_20250302_204523.jpg" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">IMG_20250302_204523.jpg</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('IMG_20250302_204523.jpg', 10, 'IMG_20250302_204523.jpg')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="IMG_20250304_122348.jpg" alt="IMG_20250304_122348.jpg" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">IMG_20250304_122348.jpg</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('IMG_20250304_122348.jpg', 10, 'IMG_20250304_122348.jpg')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
-      <img src="apple.PNG" alt="apple.PNG" class="w-32 h-32 object-cover mb-2 rounded">
-      <h3 class="text-lg font-semibold">apple.PNG</h3>
-      <p class="text-gray-600">€10.00</p>
-      <button onclick="addToCart('apple.PNG', 10, 'apple.PNG')" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded">Adicionar ao Carrinho</button>
-    </div>
-    
-  </div>
 </body>
 </html>
